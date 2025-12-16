@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'search_page.dart';
+import 'profile_page.dart';
 
 // --- Data Models (Mô phỏng dữ liệu từ App.tsx) ---
 class Category {
@@ -383,7 +385,24 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (index) => setState(() => _selectedIndex = index),
+        onTap: (index) {
+          if (index == 1) {
+            // Nút Tìm kiếm (index 1) -> Mở SearchPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchPage()),
+            );
+          } else if (index == 3) {
+            // Nút Tài khoản (index 3) -> Mở ProfilePage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
+            );
+          } else {
+            // Các nút còn lại (Trang chủ, Yêu thích)
+            setState(() => _selectedIndex = index);
+          }
+        },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
